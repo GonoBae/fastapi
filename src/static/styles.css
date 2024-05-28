@@ -3,21 +3,44 @@ body{
 	margin: 20px;;
 }
 
-#app {
+app {
 	max-width: 400px;
 	margin: 0;;
 }
 
 ul {
-	list-style-type: noen;
-	padding: 0;;
+	list-style-type: square;
+	margin: 20px;
+	padding: 10px;
 }
 
 li {
+	color: blue;
+	font-size: 16px;
 	margin-bottom: 8px;;
+}
+
+.custom-list {
+	list-style-type: disc;
+	margin: 20px;
+	padding: 0;
+}
+
+.custom-list li {
+	color: red;
+	font-size: 32px;
+	line-height: 1.6;
+}
+
+.custom-list .highlight {
+	background-color: blue;
+}
+
+.highlight {
+	background-color: yellow;
 }
 
 .completed {
 	text-decoration: line-through;
-	color: #999;;
+	color: red;
 }
