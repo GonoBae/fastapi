@@ -19,6 +19,9 @@ class Todo(BaseModel):
 async def get_todos(request:Request):
     return templates.TemplateResponse('index.html', {'request':request})
 
+@app.get("/guestbook")
+async def get_guestbook(request:Request):
+    return templates.TemplateResponse('guest.html', {'request':request})
 
 @app.router.post("/todos", response_model=Todo)
 async def create_todo(todo : Todo):

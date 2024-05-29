@@ -1,6 +1,15 @@
 body{
 	font-family: Arial, sans-serif;
-	margin: 20px;;
+	margin: 0;
+	padding: 0;
+	background-color: #f0f0f0;
+}
+
+header {
+	background-color: #333333;
+	color: #ffffff;
+	padding: 15px;
+	text-align: center;
 }
 
 app {
@@ -34,6 +43,53 @@ li {
 
 .custom-list .highlight {
 	background-color: blue;
+}
+
+.container {
+	width: 80%;
+	margin: auto;
+	padding: 20px;
+}
+
+.center-container {
+	text-align: center;
+}
+
+.input {
+	background-color: #4CAF5033;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px;
+	background-color: #4CAF50;
+	color: #ffffff;
+	text-decoration: none;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+
+.button-container {
+	text-align: center;
+}
+
+.button:hover {
+	background-color: #45a049;
+}
+
+.image-container {
+	text-align: center;
+	margin-top: 30px;
+}
+
+.image-container img {
+	width: 100%;
+	max-width: 400px;
+	height: auto;
+	border-radius: 10px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2)
 }
 
 .highlight {

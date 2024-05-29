@@ -6,7 +6,7 @@ async function addTask() {
 	// 이 변수에 할당된 요소는 이후에 HTML 문서에 추가되거나 수정될 수 있다.
 	var newTask = document.createElement("li");
 
-	newTask.textContent = taskInput.value;
+	newTask.textContent = `title: ${taskInput.value}`;
 
 	newTask.addEventListener("click", function(){
 		newTask.classList.toggle("completed");
@@ -62,6 +62,7 @@ async function showTodos() {
 	const response = await fetch('http://172.30.1.53:8000/todos/all');
 	const todos = await response.json();
 	const todoList = document.getElementById("taskList");
+	todoList.classList.add("custom-list");
 	todos.forEach(todo => {
 		const listTodo = document.createElement("li");
 		listTodo.textContent = `title: ${todo.title}`;
