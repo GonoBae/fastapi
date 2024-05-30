@@ -23,15 +23,15 @@ async def get_todos(request:Request):
 async def get_guestbook(request:Request):
     return templates.TemplateResponse('guest.html', {'request':request})
 
-@app.router.post("/todos", response_model=Todo)
+@app.router.post("/guestbook", response_model=Todo)
 async def create_todo(todo : Todo):
     db.append(todo)
     return todo
 
-@app.get("/todos/all", response_model=List[Todo])
+@app.get("/guestbook/all", response_model=List[Todo])
 async def get_todos_all():
     return db
 
-@app.get("/todos/{todo_id}", response_model=Todo)
-def read_todo(todo_id : int):
-    return db[todo_id]
+@app.get("/guestbook/{guest_id}", response_model=Todo)
+def read_todo(guest_id : int):
+    return db[guest_id]

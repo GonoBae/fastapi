@@ -36,7 +36,7 @@ li {
 }
 
 .custom-list li {
-	color: red;
+	color: #4CAF5033;
 	font-size: 32px;
 	line-height: 1.6;
 }
@@ -98,5 +98,5 @@ li {
 
 .completed {
 	text-decoration: line-through;
-	color: red;
+	color: green;
 }
