@@ -11,7 +11,7 @@ templates = Jinja2Templates(directory='templates')
 
 db = []
 
-class Todo(BaseModel):
+class Guestbook(BaseModel):
     id : int = -1
     title : str = "-1"
 
@@ -23,15 +23,15 @@ async def get_todos(request:Request):
 async def get_guestbook(request:Request):
     return templates.TemplateResponse('guest.html', {'request':request})
 
-@app.router.post("/guestbook", response_model=Todo)
-async def create_todo(todo : Todo):
-    db.append(todo)
-    return todo
+@app.router.post("/guestbook", response_model=Guestbook)
+async def create_todo(guestbook : Guestbook):
+    db.append(guestbook)
+    return guestbook
 
-@app.get("/guestbook/all", response_model=List[Todo])
+@app.get("/guestbook/all", response_model=List[Guestbook])
 async def get_todos_all():
     return db
 
-@app.get("/guestbook/{guest_id}", response_model=Todo)
+@app.get("/guestbook/{guest_id}", response_model=Guestbook)
 def read_todo(guest_id : int):
     return db[guest_id]

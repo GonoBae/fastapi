@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
         	    toggleTaskCompletion.call(this);
             	event.preventDefault(); // Prevents click event from being triggered after touchend
 	        });
-			listTodo.textContent = `title: ${todo.title}`;
+			listTodo.textContent = todo.title;
 			todoList.appendChild(listTodo);
 		});
 	}
