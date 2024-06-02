@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     var addTaskButton = document.getElementById('myButton');
+    var deleteTaskButton = document.getElementById('deleteButton');
     var taskInput = document.getElementById('taskInput');
     var taskList = document.getElementById('taskList');
 
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		async : 해당 함수는 항상 프로미스를 반환하도록 지정 (이 함수는 비동기적인 함수이고 Promise 를 반환)
 		await : 프로미스가 처리되거나 거불될 때까지 실행을 일시 중지
 		*/
-		response = await fetch('http://172.30.1.53:8000/guestbook', {
+		response = await fetch('http://127.0.0.1:8000/guestbook', {
 		method: 'POST',
 		headers: {
 			'accept': 'application/json',
@@ -33,15 +34,36 @@ document.addEventListener("DOMContentLoaded", function() {
 			id: taskList.children.length - 1,
 			title:taskInput.value
 		})
-	});
-    if(response.ok) {
-		const item = await response.json();
-		alert('Item added: ' + JSON.stringify(item));
-	} else {
-		alert('Failed to add item');
-	}
+	    });
+        if(response.ok) {
+		    const item = await response.json();
+		    alert('Item added: ' + JSON.stringify(item));
+	    } else {
+		    alert('Failed to add item');
+	    }
         taskList.appendChild(listItem);
         taskInput.value = '';
+    }
+
+
+    async function deleteSelectedItem() {
+        id = 0;
+        const response = await fetch('http://127.0.0.1:8000/guestbook', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id:-1,
+                title:"aaa"
+            })
+        });
+        if(response.ok) {
+            alert('Item deleted: ');
+        } else {
+            alert('Failed to delete item');
+        }
+        showTodos();
     }
 
     function toggleTaskCompletion() {
@@ -54,8 +76,10 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault(); // Prevents click event from being triggered after touchend
     });
 
+    deleteTaskButton.addEventListener('click', deleteSelectedItem);
+
 	async function showTodos() {
-		const response = await fetch('http://172.30.1.53:8000/guestbook/all');
+		const response = await fetch('http://127.0.0.1:8000/guestbook/all');
 		const todos = await response.json();
 		const todoList = document.getElementById("taskList");
 		todoList.classList.add("custom-list");

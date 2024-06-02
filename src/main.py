@@ -12,7 +12,7 @@ templates = Jinja2Templates(directory='templates')
 db = []
 
 class Guestbook(BaseModel):
-    id : int = -1
+    id : int = 0
     title : str = "-1"
 
 @app.get("/")
@@ -35,3 +35,7 @@ async def get_todos_all():
 @app.get("/guestbook/{guest_id}", response_model=Guestbook)
 def read_todo(guest_id : int):
     return db[guest_id]
+
+@app.delete("/guestbook", response_model=Guestbook)
+def delete_guestbook(guestbook : Guestbook):
+    db.remove(guestbook)
