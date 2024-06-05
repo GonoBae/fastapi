@@ -4,13 +4,18 @@ document.addEventListener("DOMContentLoaded", function() {
     var taskInput = document.getElementById('taskInput');
     var taskList = document.getElementById('taskList');
 	let item = null;
+
+	function generateUniqueId() {
+    	return Math.floor(Math.random() * 1000000);    
+	}
+
     async function addTask() {
         var taskText = taskInput.value.trim();
         if (taskText === '') return;
 
         var listItem = document.createElement('li');
         listItem.textContent = taskText;
-		listItem.dataset.id = taskList.children.length - 1;
+		listItem.dataset.id = generateUniqueId();
 		listItem.dataset.title = taskText;
 
         // Add event listeners for both click and touch events
@@ -37,15 +42,15 @@ document.addEventListener("DOMContentLoaded", function() {
 		async : 해당 함수는 항상 프로미스를 반환하도록 지정 (이 함수는 비동기적인 함수이고 Promise 를 반환)
 		await : 프로미스가 처리되거나 거불될 때까지 실행을 일시 중지
 		*/
-		response = await fetch('http://127.0.0.1:8000/guestbook', {
+		response = await fetch('http://172.30.1.53:8000/guestbook', {
 		method: 'POST',
 		headers: {
 			'accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			id: taskList.children.length - 1,
-			title:taskInput.value
+			id: listItem.dataset.id,
+			title: taskInput.value
 		})
 	    });
         if(response.ok) {
@@ -64,17 +69,17 @@ document.addEventListener("DOMContentLoaded", function() {
 			alert("Select Item!!!");
 			return;
 		}
-        
+        const itemid = parseInt(item.dataset.id); 
         try {
-            const response =  await fetch('http://127.0.0.1:8000/guestbook/', {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id: item.dataset.id,
-                    title: item.dataset.title
-                })
+            const response =  await fetch(`http://172.30.1.53:8000/guestbook/${itemid}`, {
+                method: 'DELETE'
+                //headers: {
+                //    'Content-Type': 'application/json'
+                //},
+                //body: JSON.stringify({
+                    //id: item.dataset.id,
+                    //title: item.dataset.title
+                //})
             });
             if(response.ok) {
                 alert('Item deleted: ');
@@ -85,8 +90,6 @@ document.addEventListener("DOMContentLoaded", function() {
         } catch(error) {
             console.log(error);
         }
-        
-        
 		item = null;
         showTodos();
     }
@@ -105,8 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	async function showTodos() {
         taskList.innerHTML = '';
-        var taskText = taskInput.value.trim();
-		const response = await fetch('http://127.0.0.1:8000/guestbook/all');
+		const response = await fetch('http://172.30.1.53:8000/guestbook/all');
 		const todos = await response.json();
 		const todoList = document.getElementById("taskList");
 		todoList.classList.add("custom-list");

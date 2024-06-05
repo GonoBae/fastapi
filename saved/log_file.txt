@@ -1,0 +1,14 @@
+[ 2024-06-05 22:50:18 | INFO ] Run Server
+[ 2024-06-05 22:50:19 | DEBUG ] 3 changes detected: {(<Change.added: 1>, '/home/baecrong/Desktop/python/fastapi/src/__pycache__/main.cpython-310.pyc'), (<Change.deleted: 3>, '/home/baecrong/Desktop/python/fastapi/src/__pycache__/main.cpython-310.pyc.281473016123696'), (<Change.added: 1>, '/home/baecrong/Desktop/python/fastapi/src/__pycache__/main.cpython-310.pyc.281473016123696')}
+[ 2024-06-05 22:50:36 | INFO ] Stop Server
+[ 2024-06-05 22:51:14 | INFO ] Run Server
+[ 2024-06-05 22:51:15 | DEBUG ] 3 changes detected: {(<Change.added: 1>, '/home/baecrong/Desktop/python/fastapi/src/__pycache__/main.cpython-310.pyc'), (<Change.added: 1>, '/home/baecrong/Desktop/python/fastapi/src/__pycache__/main.cpython-310.pyc.281473705955632'), (<Change.deleted: 3>, '/home/baecrong/Desktop/python/fastapi/src/__pycache__/main.cpython-310.pyc.281473705955632')}
+[ 2024-06-05 22:51:29 | INFO ] Stop Server
+[ 2024-06-05 22:55:52 | INFO ] Run Server
+[ 2024-06-05 22:55:53 | INFO ] Stop Server
+[ 2024-06-05 22:56:23 | INFO ] Run Server
+[ 2024-06-05 22:56:24 | INFO ] 3 changes detected
+[ 2024-06-05 22:56:31 | INFO ] Stop Server
+[ 2024-06-05 22:58:22 | INFO ] Run Server
+[ 2024-06-05 22:58:24 | DEBUG ] 3 changes detected: {(<Change.added: 1>, '/home/baecrong/Desktop/python/fastapi/src/__pycache__/main.cpython-310.pyc.281473672925488'), (<Change.deleted: 3>, '/home/baecrong/Desktop/python/fastapi/src/__pycache__/main.cpython-310.pyc.281473672925488'), (<Change.added: 1>, '/home/baecrong/Desktop/python/fastapi/src/__pycache__/main.cpython-310.pyc')}
+[ 2024-06-05 22:59:21 | INFO ] Stop Server
