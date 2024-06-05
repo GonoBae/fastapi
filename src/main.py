@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -36,6 +36,9 @@ async def get_todos_all():
 def read_todo(guest_id : int):
     return db[guest_id]
 
-@app.delete("/guestbook", response_model=Guestbook)
+@app.delete("/guestbook/", response_model=Guestbook)
 def delete_guestbook(guestbook : Guestbook):
-    db.remove(guestbook)
+    if db.__contains__(guestbook):
+        db.remove(guestbook)
+    else:
+        raise HTTPException(status_code=404, detail="guestbook is not found")

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		async : 해당 함수는 항상 프로미스를 반환하도록 지정 (이 함수는 비동기적인 함수이고 Promise 를 반환)
 		await : 프로미스가 처리되거나 거불될 때까지 실행을 일시 중지
 		*/
-		response = await fetch('http://172.30.1.53:8000/guestbook', {
+		response = await fetch('http://127.0.0.1:8000/guestbook', {
 		method: 'POST',
 		headers: {
 			'accept': 'application/json',
@@ -64,21 +64,29 @@ document.addEventListener("DOMContentLoaded", function() {
 			alert("Select Item!!!");
 			return;
 		}
-        const response = await fetch('http://172.30.1.53:8000/guestbook', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: item.dataset.id,
-                title: item.dataset.title
-            })
-        });
-        if(response.ok) {
-            alert('Item deleted: ');
-        } else {
-            alert('Failed to delete item');
+        
+        try {
+            const response =  await fetch('http://127.0.0.1:8000/guestbook/', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: item.dataset.id,
+                    title: item.dataset.title
+                })
+            });
+            if(response.ok) {
+                alert('Item deleted: ');
+            } else {
+                const errorDetail = await response.json();
+                throw new Error(errorDetail.detail);
+            }
+        } catch(error) {
+            console.log(error);
         }
+        
+        
 		item = null;
         showTodos();
     }
@@ -96,31 +104,33 @@ document.addEventListener("DOMContentLoaded", function() {
     deleteTaskButton.addEventListener('click', deleteSelectedItem);
 
 	async function showTodos() {
-		const response = await fetch('http://172.30.1.53:8000/guestbook/all');
+        taskList.innerHTML = '';
+        var taskText = taskInput.value.trim();
+		const response = await fetch('http://127.0.0.1:8000/guestbook/all');
 		const todos = await response.json();
 		const todoList = document.getElementById("taskList");
 		todoList.classList.add("custom-list");
 		todos.forEach(todo => {
 			const listTodo = document.createElement("li");
-			listItem.dataset.id = taskList.children.length - 1;
-			listItem.dataset.title = taskText;
+			listTodo.dataset.id = todo.id;
+			listTodo.dataset.title = todo.title;
 			// Add event listeners for both click and touch events
-        listTodo.addEventListener('click', function(event) {
-			toggleTaskCompletion.call(this);
-			event.preventDefault();
-			if(null == item) {
-				item = event.target;
-				console.log(item.dataset.id);
-			} else{
-				item = null;
-			}
-		});
-        listTodo.addEventListener('touchend', function(event) {
-            toggleTaskCompletion.call(this);
-            event.preventDefault(); // Prevents click event from being triggered after touchend
-			item = event.target;
-			alert(item);
-        });
+            listTodo.addEventListener('click', function(event) {
+			    toggleTaskCompletion.call(this);
+			    event.preventDefault();
+			    if(null == item) {
+				    item = event.target;
+				    console.log(item.dataset.id);
+			    } else{
+				     item = null;
+                }
+		    });
+            listTodo.addEventListener('touchend', function(event) {
+                toggleTaskCompletion.call(this);
+                event.preventDefault(); // Prevents click event from being triggered after touchend
+			    item = event.target;
+			    alert(item);
+            });
 			listTodo.textContent = todo.title;
 			todoList.appendChild(listTodo);
 		});
